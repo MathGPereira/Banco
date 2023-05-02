@@ -1,0 +1,8 @@
+@import "../abstract/variaveis";
+
+body {
+    box-sizing: border-box;
+    font: $estilo-da-fonte $peso-da-fonte $tamanho-da-fonte $familia-da-fonte;
+    height: 100vh;
+    width: 100vw;
+}
