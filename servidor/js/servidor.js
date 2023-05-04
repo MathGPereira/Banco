@@ -1,8 +1,5 @@
-import Banco from "./classes/Banco.js";
-//import Cliente from "./classes/Cliente.js";
+import Conta from "./classes/Conta.js";
+import Cliente from "./classes/Cliente.js";
 
-const banco = new Banco();
-
-const usuario = await banco.verificaUsuario(4);
-
-console.log(usuario)
+const conta = new Conta("josesilv", "123123123213", "0125410365", "0426");
+const cliente = new Cliente("josé", "Silva", "jsilva@outlook.com", "11111111111", conta)

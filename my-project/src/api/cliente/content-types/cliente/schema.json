@@ -29,15 +29,18 @@
       "required": true,
       "minLength": 3
     },
-    "usuario": {
+    "cpf": {
       "type": "string",
-      "unique": true,
-      "required": true
-    },
-    "senha": {
-      "type": "richtext",
       "required": true,
-      "minLength": 8
+      "unique": true,
+      "minLength": 11,
+      "maxLength": 14
+    },
+    "contas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::conta.conta",
+      "mappedBy": "cliente"
     }
   }
 }

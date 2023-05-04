@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contas",
+  "info": {
+    "singularName": "conta",
+    "pluralName": "contas",
+    "displayName": "Conta",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "usuario": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "valor": {
+      "type": "biginteger",
+      "required": true,
+      "min": "0"
+    },
+    "cliente": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cliente.cliente",
+      "inversedBy": "contas"
+    },
+    "senha": {
+      "type": "string",
+      "required": true,
+      "minLength": 8
+    },
+    "agencia": {
+      "type": "string",
+      "required": true,
+      "maxLength": 4,
+      "minLength": 4,
+      "unique": true
+    },
+    "numeroDaConta": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "minLength": 9
+    }
+  }
+}

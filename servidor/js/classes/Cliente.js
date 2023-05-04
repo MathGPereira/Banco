@@ -1,21 +1,32 @@
+import Sistema from "./controlador/Sistema.js";
+
 export default class Cliente {
 
-    #nome;
-    #sobrenome;
-    #email;
-    #conta;
+    nome;
+    sobrenome;
+    email;
+    cpf;
+    conta;
 
-    constructor(nome, sobrenome, email, conta) {
-        this.#nome = nome;
-        this.#sobrenome = sobrenome;
-        this.#email = email;
+    constructor(nome, sobrenome, email, cpf, conta) {
+        this.nome   = nome;
+        this.sobrenome = sobrenome;
+        this.email = email;
+        this.cpf = cpf;
+        this.conta = conta;
     }
 
     login() {
 
     }
 
-    sacar(valor) {
+    async sacar(valor) {
+        const sistema = new Sistema();
+
+        if(sistema.verificaSaque(valor, conta)) {
+            
+        }
+
 
     }
 
@@ -27,7 +38,7 @@ export default class Cliente {
         
     }
 
-    static async #getAPI() {
+    static async #getPostAPI() {
         const url = `http://localhost:1337/api/${tipo}/${id}`;
         const resp = await fetch(url);
 
