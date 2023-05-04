@@ -3,4 +3,6 @@ import Banco from "./classes/Banco.js";
 
 const banco = new Banco();
 
-const usuario = banco.verificaUsuario(4);
+const usuario = await banco.verificaUsuario(4);
+
+console.log(usuario)

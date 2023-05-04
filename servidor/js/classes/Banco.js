@@ -1,12 +1,13 @@
 export default class Banco {
 
     async verificaUsuario(id) {
-        const usuario = await Banco.#conectaAPI(id)
+        const usuario = await Banco.#conectaAPI(id);
 
-        console.log(usuario.data.attributes);
+        return usuario;
     }
 
-    async cadastrarUsuario(listaDadosUsuario) {await Banco.#conectaAPI("", "POST", listaDadosUsuario)
+    async cadastrarUsuario(listaDadosUsuario) {
+        await Banco.#conectaAPI("", "POST", listaDadosUsuario);
     }
 
     async deletarUsuario(id) {
@@ -14,17 +15,17 @@ export default class Banco {
     }
 
     async atualizarUsuario(id, listaDadosUsuario) {
-        await Banco.#conectaAPI("", "PUT", listaDadosUsuario)
+        await Banco.#conectaAPI("", "PUT", listaDadosUsuario);
     }
 
     static async #conectaAPI(id="", metodo="GET", corpoDoConteudo=null) {
         const url = `http://localhost:1337/api/clientes/${id}`;
-        const resp = await fetch(url, Banco.#verificaOpcao(metodo, corpoDoConteudo));
+        const resp = await fetch(url, Banco.#verificaMetodo(metodo, corpoDoConteudo));
         
         return resp.json();
     }
 
-    static #verificaOpcao(metodo, corpoDoConteudo) {
+    static #verificaMetodo(metodo, corpoDoConteudo) {
         let option;
 
         if(metodo === "GET" || metodo === "DELETE") {
