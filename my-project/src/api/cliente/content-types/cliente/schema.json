@@ -35,8 +35,9 @@
       "required": true
     },
     "senha": {
-      "type": "password",
-      "required": true
+      "type": "richtext",
+      "required": true,
+      "minLength": 8
     }
   }
 }
