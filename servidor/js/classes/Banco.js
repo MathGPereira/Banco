@@ -5,7 +5,7 @@ export default class Banco {
     sistema = new Sistema();
 
     cadastrarUsuario(...listaDadosUsuario) {
-        this.sistema.verificaCadastroDeUsuario(listaDadosUsuario) ? console.log("Cadastro realizado com sucesso!") : console.log("Cadastro negado!");
+        this.sistema.verificaCadastroDeUsuario(...listaDadosUsuario) ? console.log("Cadastro realizado com sucesso!") : console.log("Cadastro negado!");
     }
 
     getUsuario(id) {
@@ -17,7 +17,7 @@ export default class Banco {
     }
 
     atualizarUsuario(id, listaDadosUsuario) {
-        
+        this.sistema.verificaUsuarioAlterado(id, listaDadosUsuario);
     }
 
     // async criarNovaConta(usuario, senha, numeroDaConta, agencia) {

@@ -1,11 +1,11 @@
 export default class Sistema {
 
-    verificaCadastroDeUsuario(listaDadosDoUsuario) {
-        const [nome, sobrenome, email, cpf, conta] = [...listaDadosDoUsuario]
+    verificaCadastroDeUsuario(...listaDadosDoUsuario) {
+        const cliente = listaDadosDoUsuario[0];
 
-        if(Sistema.#validaNome(nome) && Sistema.#validaEmail(email) && Sistema.#validaCpf(cpf)) {
+        if(Sistema.#validaNome(cliente.nome) && Sistema.#validaEmail(cliente.email) && Sistema.#validaCpf(cliente.cpf)) {
             try {
-                this.#cadastraUsuario(listaDadosDoUsuario);
+                Sistema.#cadastraUsuario(cliente);
             }catch(erro) {
                 return erro;
             }finally {
@@ -30,7 +30,7 @@ export default class Sistema {
         const usuario = await Sistema.#conectaAPI(id);
 
         if(!usuario.error) {
-            this.#deletaUsuario(id);
+            Sistema.#deletaUsuario(id);
 
             return;
         }
@@ -42,7 +42,7 @@ export default class Sistema {
         const usuario = await Sistema.#conectaAPI(id);
 
         if(!usuario.error) {
-            this.#atualizaUsuario(id, listaDadosUsuario);
+            Sistema.#atualizaUsuario(id, listaDadosUsuario);
 
             return;
         }
@@ -50,34 +50,40 @@ export default class Sistema {
         return usuario.error;
     }
 
-    //verificaLogin() {}
+    verificaSaque(valor, conta) {
+        if(Sistema.#verificaConta(conta) && conta.valor - valor > 0) {
+            Sistema.#finalizaSaque(valor, conta);
 
-    // verificaSaque(valor, conta) {
-    //     if(conta.valor - valor > 0) {
-    //         Sistema.#finalizaSaque(valor, conta)
+            return true;
+        }
 
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
+        return false;
+    }
 
     //verificaDeposito() {}
 
     //verificaTransferencia() {}
 
-    //static #finalizaSaque() {}
+    static async #verificaConta(id) {
+        const conta = await Sistema.#conectaAPI(id, "GET", [null], "contas")
 
-    async #atualizaUsuario(id, listaDadosUsuario) {
+        console.log(conta);
+    }
+
+    static async #finalizaSaque() {
+
+    }
+
+    static async #atualizaUsuario(id, listaDadosUsuario) {
         await Sistema.#conectaAPI(id, "PUT", listaDadosUsuario);
     }
 
-    async #deletaUsuario(id) {
+    static async #deletaUsuario(id) {
         await Sistema.#conectaAPI(id, "DELETE");
     }
 
-    async #cadastraUsuario(...listaDadosDoUsuario) {
-        await Sistema.#conectaAPI("", "POST", listaDadosDoUsuario);
+    static async #cadastraUsuario(cliente) {
+        await Sistema.#conectaAPI("", "POST", cliente);
     }
 
     static async #mostraUsuarioCadastrado(id) {
@@ -164,14 +170,14 @@ export default class Sistema {
         return !numerosRepetidos.includes(cpf);
     }
 
-    static async #conectaAPI(id="", metodo="GET", corpoDoConteudo=[null]) {
-        const url = `http://localhost:1337/api/clientes/${id}`;
-        const resp = await fetch(url, Sistema.#verificaMetodo(metodo, ...corpoDoConteudo));
+    static async #conectaAPI(id="", metodo="GET", corpoDoConteudo=[null], lugar="clientes") {
+        const url = `http://localhost:1337/api/${lugar}/${id}`;
+        const resp = await fetch(url, Sistema.#verificaMetodo(metodo, corpoDoConteudo));
 
         return resp.json();
     }
 
-    static #verificaMetodo(metodo, corpoDoConteudo) {
+    static #verificaMetodo(metodo, cliente) {
         let option;
 
         if(metodo === "GET" || metodo === "DELETE") {
@@ -179,20 +185,12 @@ export default class Sistema {
                 method: metodo
             }
         }else if(metodo === "POST" || metodo === "PUT") {
-            const [nome, sobrenome, email, cpf, conta] = [...corpoDoConteudo];
-
             option = {
                 method: `${metodo}`,
                 headers: {
                     "Content-type": "application/json"
                 },
-                body: JSON.stringify({data: {
-                    nome: nome,
-                    sobrenome: sobrenome,
-                    email: email,
-                    cpf: cpf,
-                    conta: conta
-                }})
+                body: JSON.stringify({data: cliente})
             }
         }
 

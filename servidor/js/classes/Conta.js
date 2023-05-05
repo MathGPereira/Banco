@@ -1,17 +1,13 @@
 export default class Conta {
     
-    id;
     usuario;
     senha;
-    numeroDaConta;
-    agencia;
+    numeroDaConta = Math.floor(Math.random() * 999999999);
+    agencia = "0486";
     valor = 0;
 
-    constructor(id, usuario, senha, numeroDaConta, agencia) {
-        this.id = id;
+    constructor(usuario, senha) {
         this.usuario = usuario;
         this.senha = senha;
-        this.numeroDaConta = numeroDaConta;
-        this.agencia = agencia;
     }
 }
