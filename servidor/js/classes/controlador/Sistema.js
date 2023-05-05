@@ -4,16 +4,26 @@ export default class Sistema {
         const [nome, sobrenome, email, cpf, conta] = [...listaDadosDoUsuario]
 
         if(Sistema.#validaNome(nome) && Sistema.#validaEmail(email) && Sistema.#validaCpf(cpf)) {
-            this.#cadastraUsuario(listaDadosDoUsuario);
-
-            return true;
+            try {
+                this.#cadastraUsuario(listaDadosDoUsuario);
+            }catch(erro) {
+                return erro;
+            }finally {
+                return true;
+            }
         }
 
         return false;
     }
 
-    async #cadastraUsuario(...listaDadosDoUsuario) {
-        await Sistema.#conectaAPI("", "POST", listaDadosDoUsuario);
+    async verificaUsuarioCadastrado(id) {
+        const usuario = await Sistema.#conectaAPI(id);
+
+        if(usuario.error) {
+            return usuario.error;
+        }else {
+            Sistema.#mostraUsuarioCadastrado(id);
+        }
     }
 
     //verificaLogin() {}
@@ -33,6 +43,14 @@ export default class Sistema {
     //verificaTransferencia() {}
 
     //static #finalizaSaque() {}
+
+    async #cadastraUsuario(...listaDadosDoUsuario) {
+        await Sistema.#conectaAPI("", "POST", listaDadosDoUsuario);
+    }
+
+    static async #mostraUsuarioCadastrado(id) {
+        return await Sistema.#conectaAPI(id);
+    }
 
     static #validaNome(nome) {
         if(nome.length >= 3) {
@@ -114,7 +132,7 @@ export default class Sistema {
         return !numerosRepetidos.includes(cpf);
     }
 
-    static async #conectaAPI(id="", metodo="GET", corpoDoConteudo=null) {
+    static async #conectaAPI(id="", metodo="GET", corpoDoConteudo=[null]) {
         const url = `http://localhost:1337/api/clientes/${id}`;
         const resp = await fetch(url, Sistema.#verificaMetodo(metodo, ...corpoDoConteudo));
 
