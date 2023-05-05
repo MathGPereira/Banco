@@ -1,12 +1,14 @@
 export default class Conta {
     
+    id;
     usuario;
     senha;
     numeroDaConta;
     agencia;
     valor = 0;
 
-    constructor(usuario, senha, numeroDaConta, agencia) {
+    constructor(id, usuario, senha, numeroDaConta, agencia) {
+        this.id = id;
         this.usuario = usuario;
         this.senha = senha;
         this.numeroDaConta = numeroDaConta;

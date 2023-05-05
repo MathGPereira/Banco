@@ -1,61 +1,28 @@
-import Conta from "./Conta.js";
+import Sistema from "./controlador/Sistema.js";
 
 export default class Banco {
 
-    async verificaUsuario(id) {
-        const usuario = await Banco.#conectaAPI(id);
+    async cadastrarUsuario(...listaDadosUsuario) {
+        const sistema = new Sistema();
 
-        return usuario;
+        sistema.verificaCadastroDeUsuario(listaDadosUsuario);
     }
 
-    async cadastrarUsuario(listaDadosUsuario) {
-        await Banco.#conectaAPI("", "POST", listaDadosUsuario);
-    }
+    // async verificaUsuario(id) {
+    //     const usuario = await Banco.#conectaAPI(id);
 
-    async deletarUsuario(id) {
-        await Banco.#conectaAPI(id, "DELETE");
-    }
-
-    async atualizarUsuario(id, listaDadosUsuario) {
-        await Banco.#conectaAPI(id, "PUT", listaDadosUsuario);
-    }
-
-    async criarNovaConta(usuario, senha, numeroDaConta, agencia) {
-        return new Conta(usuario, senha, numeroDaConta, agencia);
-    }
-
-    // static async #conectaAPI(id="", metodo="GET", corpoDoConteudo=null) {
-    //     const url = `http://localhost:1337/api/clientes/${id}`;
-    //     const resp = await fetch(url, Banco.#verificaMetodo(metodo, corpoDoConteudo));
-        
-    //     return resp.json();
+    //     return usuario;
     // }
 
-    // static #verificaMetodo(metodo, corpoDoConteudo) {
-    //     let option;
+    // async deletarUsuario(id) {
+    //     await Banco.#conectaAPI(id, "DELETE");
+    // }
 
-    //     if(metodo === "GET" || metodo === "DELETE") {
-    //         option = {
-    //             method: metodo
-    //         }
-    //     }else if(metodo === "POST" || metodo === "PUT") {
-    //         const [nome, sobrenome, email, usuario, senha] = [...corpoDoConteudo];
+    // async atualizarUsuario(id, listaDadosUsuario) {
+    //     await Banco.#conectaAPI(id, "PUT", listaDadosUsuario);
+    // }
 
-    //         option = {
-    //             method: `${metodo}`,
-    //             headers: {
-    //                 "Content-type": "application/json"
-    //             },
-    //             body: JSON.stringify({data: {
-    //                 nome: nome,
-    //                 sobrenome: sobrenome,
-    //                 email: email,
-    //                 usuario: usuario,
-    //                 senha: senha
-    //             }})
-    //         }
-    //     }
-
-    //     return option;
+    // async criarNovaConta(usuario, senha, numeroDaConta, agencia) {
+    //     return new Conta(usuario, senha, numeroDaConta, agencia);
     // }
 }

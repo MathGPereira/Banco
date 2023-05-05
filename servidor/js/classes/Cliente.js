@@ -1,47 +1,40 @@
-import Sistema from "./controlador/Sistema.js";
+// import Sistema from "./controlador/Sistema.js";
 
-export default class Cliente {
+// export default class Cliente {
 
-    nome;
-    sobrenome;
-    email;
-    cpf;
-    conta;
+//     nome;
+//     sobrenome;
+//     email;
+//     cpf;
+//     conta;
 
-    constructor(nome, sobrenome, email, cpf, conta) {
-        this.nome   = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.cpf = cpf;
-        this.conta = conta;
-    }
+//     constructor(nome, sobrenome, email, cpf, conta) {
+//         this.nome   = nome;
+//         this.sobrenome = sobrenome;
+//         this.email = email;
+//         this.cpf = cpf;
+//         this.conta = conta;
+//     }
 
-    login() {
+//     login() {
 
-    }
+//     }
 
-    async sacar(valor) {
-        const sistema = new Sistema();
-
-        if(sistema.verificaSaque(valor, conta)) {
-            
-        }
-
-
-    }
-
-    depositar() {
-
-    }
-
-    transferir() {
+//     sacar(valor) {
+//         const sistema = new Sistema();
         
-    }
+//         if(!sistema.verificaSaque(valor, conta)) {
+//             console.log("Você não possui saldo o suficiente!");
+//         }
 
-    static async #getPostAPI() {
-        const url = `http://localhost:1337/api/${tipo}/${id}`;
-        const resp = await fetch(url);
+//         console.log(`Saque no valor de R$${valor} realizado com sucesso!`);
+//     }
 
-        return resp.json();
-    }
-}
+//     depositar() {
+
+//     }
+
+//     transferir() {
+        
+//     }
+// }
