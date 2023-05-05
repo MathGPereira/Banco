@@ -12,9 +12,9 @@ export default class Banco {
         this.sistema.verificaUsuarioCadastrado(id);
     }
 
-    // async deletarUsuario(id) {
-    //     await Banco.#conectaAPI(id, "DELETE");
-    // }
+    deletarUsuario(id) {
+        this.sistema.verificaUsuarioDeletado(id);
+    }
 
     // async atualizarUsuario(id, listaDadosUsuario) {
     //     await Banco.#conectaAPI(id, "PUT", listaDadosUsuario);

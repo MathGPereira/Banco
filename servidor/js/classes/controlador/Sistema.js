@@ -26,6 +26,18 @@ export default class Sistema {
         }
     }
 
+    async verificaUsuarioDeletado(id) {
+        const usuario = await Sistema.#conectaAPI(id);
+
+        if(!usuario.error) {
+            this.#deletaUsuario(id);
+
+            return;
+        }
+
+        return usuario.error;
+    }
+
     //verificaLogin() {}
 
     // verificaSaque(valor, conta) {
@@ -43,6 +55,10 @@ export default class Sistema {
     //verificaTransferencia() {}
 
     //static #finalizaSaque() {}
+
+    async #deletaUsuario(id) {
+        await Sistema.#conectaAPI(id, "DELETE");
+    }
 
     async #cadastraUsuario(...listaDadosDoUsuario) {
         await Sistema.#conectaAPI("", "POST", listaDadosDoUsuario);
