@@ -38,6 +38,18 @@ export default class Sistema {
         return usuario.error;
     }
 
+    async verificaUsuarioAlterado(id, listaDadosUsuario) {
+        const usuario = await Sistema.#conectaAPI(id);
+
+        if(!usuario.error) {
+            this.#atualizaUsuario(id, listaDadosUsuario);
+
+            return;
+        }
+
+        return usuario.error;
+    }
+
     //verificaLogin() {}
 
     // verificaSaque(valor, conta) {
@@ -55,6 +67,10 @@ export default class Sistema {
     //verificaTransferencia() {}
 
     //static #finalizaSaque() {}
+
+    async #atualizaUsuario(id, listaDadosUsuario) {
+        await Sistema.#conectaAPI(id, "PUT", listaDadosUsuario);
+    }
 
     async #deletaUsuario(id) {
         await Sistema.#conectaAPI(id, "DELETE");

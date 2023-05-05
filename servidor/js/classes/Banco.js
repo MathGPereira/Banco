@@ -16,9 +16,9 @@ export default class Banco {
         this.sistema.verificaUsuarioDeletado(id);
     }
 
-    // async atualizarUsuario(id, listaDadosUsuario) {
-    //     await Banco.#conectaAPI(id, "PUT", listaDadosUsuario);
-    // }
+    atualizarUsuario(id, listaDadosUsuario) {
+        
+    }
 
     // async criarNovaConta(usuario, senha, numeroDaConta, agencia) {
     //     return new Conta(usuario, senha, numeroDaConta, agencia);
