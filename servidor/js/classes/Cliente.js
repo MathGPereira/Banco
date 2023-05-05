@@ -2,13 +2,15 @@
 
 // export default class Cliente {
 
+//     id;
 //     nome;
 //     sobrenome;
 //     email;
 //     cpf;
 //     conta;
 
-//     constructor(nome, sobrenome, email, cpf, conta) {
+//     constructor(id, nome, sobrenome, email, cpf, conta) {
+//         this.id = id;
 //         this.nome   = nome;
 //         this.sobrenome = sobrenome;
 //         this.email = email;

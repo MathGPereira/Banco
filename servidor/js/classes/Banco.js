@@ -2,10 +2,10 @@ import Sistema from "./controlador/Sistema.js";
 
 export default class Banco {
 
-    async cadastrarUsuario(...listaDadosUsuario) {
+    cadastrarUsuario(...listaDadosUsuario) {
         const sistema = new Sistema();
 
-        sistema.verificaCadastroDeUsuario(listaDadosUsuario);
+        sistema.verificaCadastroDeUsuario(listaDadosUsuario) ? console.log("Cadastro realizado com sucesso!") : console.log("Cadastro negado!");
     }
 
     // async verificaUsuario(id) {

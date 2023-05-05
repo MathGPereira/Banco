@@ -3,17 +3,17 @@ export default class Sistema {
     verificaCadastroDeUsuario(listaDadosDoUsuario) {
         const [nome, sobrenome, email, cpf, conta] = [...listaDadosDoUsuario]
 
-        if(Sistema.validaNome(nome) && Sistema.validaEmail(email) && Sistema.validaCpf(cpf)) {
-            this.cadastraUsuario(nome, sobrenome, email, cpf, conta);
+        if(Sistema.#validaNome(nome) && Sistema.#validaEmail(email) && Sistema.#validaCpf(cpf)) {
+            this.#cadastraUsuario(listaDadosDoUsuario);
 
-            return;
+            return true;
         }
 
-        console.log("Dados inválidos para cadastro!");
+        return false;
     }
 
-    async cadastraUsuario(nome, sobrenome, email, cof, conta) {
-        console.log("Usuário com nome " + nome + "cadastrado com sucesso!");
+    async #cadastraUsuario(...listaDadosDoUsuario) {
+        await Sistema.#conectaAPI("", "POST", listaDadosDoUsuario);
     }
 
     //verificaLogin() {}
@@ -34,7 +34,7 @@ export default class Sistema {
 
     //static #finalizaSaque() {}
 
-    static validaNome(nome) {
+    static #validaNome(nome) {
         if(nome.length >= 3) {
             return true;
         }
@@ -42,7 +42,7 @@ export default class Sistema {
         return false;
     }
 
-    static validaEmail(email) {
+    static #validaEmail(email) {
         const re = /\w+@\w+\.\w+/;
         const resultado = re.test(email);
 
@@ -53,15 +53,15 @@ export default class Sistema {
         return false;
     }
 
-    static validaCpf(cpf) {
-        if(this.validaPrimeiroDigito(cpf) && this.validaSegundoDigito(cpf) && this.validaNumeroRepetido(cpf)) {
+    static #validaCpf(cpf) {
+        if(this.#validaPrimeiroDigito(cpf) && this.#validaSegundoDigito(cpf) && this.#validaNumeroRepetido(cpf)) {
             return true;
         }
 
         return false;
     }
 
-    static validaPrimeiroDigito(cpf) {
+    static #validaPrimeiroDigito(cpf) {
         let soma = 0;
         let multiplicador = 10;
 
@@ -79,7 +79,7 @@ export default class Sistema {
         return soma == cpf[9];
     } 
 
-    static validaSegundoDigito(cpf) {
+    static #validaSegundoDigito(cpf) {
         let soma = 0;
         let multiplicador = 11;
 
@@ -97,7 +97,7 @@ export default class Sistema {
         return soma == cpf[10];
     }
 
-    static validaNumeroRepetido(cpf) {
+    static #validaNumeroRepetido(cpf) {
         const numerosRepetidos = [
             "00000000000",
             "11111111111",
@@ -116,8 +116,8 @@ export default class Sistema {
 
     static async #conectaAPI(id="", metodo="GET", corpoDoConteudo=null) {
         const url = `http://localhost:1337/api/clientes/${id}`;
-        const resp = await fetch(url, Sistema.#verificaMetodo(metodo, corpoDoConteudo));
-        
+        const resp = await fetch(url, Sistema.#verificaMetodo(metodo, ...corpoDoConteudo));
+
         return resp.json();
     }
 
@@ -129,7 +129,7 @@ export default class Sistema {
                 method: metodo
             }
         }else if(metodo === "POST" || metodo === "PUT") {
-            const [nome, sobrenome, email, usuario, senha] = [...corpoDoConteudo];
+            const [nome, sobrenome, email, cpf, conta] = [...corpoDoConteudo];
 
             option = {
                 method: `${metodo}`,
@@ -140,8 +140,8 @@ export default class Sistema {
                     nome: nome,
                     sobrenome: sobrenome,
                     email: email,
-                    usuario: usuario,
-                    senha: senha
+                    cpf: cpf,
+                    conta: conta
                 }})
             }
         }
