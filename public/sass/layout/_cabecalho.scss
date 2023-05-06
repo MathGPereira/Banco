@@ -3,6 +3,7 @@
 .cabecalho {
     background-color: $cor-secundaria;
     padding: 1em;
+    position: relative;
     &__titulo {
         width: auto;
         .titulo__link-login {

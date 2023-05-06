@@ -1,0 +1,29 @@
+@import "../abstract/variaveis";
+
+.lateral {
+    position: absolute;
+    right: 10%;
+    top: 5%;
+    .menu-navegacao__lista {
+        align-items: center;
+        display: flex;
+        column-gap: 40px;
+        justify-content: space-between;
+        .lista__item {
+            padding-bottom: .5em;
+            transition: border .1s ease-in-out;
+            &:hover {
+                border-bottom: 3px solid $cor-primaria;
+            }
+            .menu-navegacao__link {
+                color: $cor-primaria;
+                font-size: 22px;
+                font-weight: 500;
+                transition: color .1s linear;
+                &:hover {
+                    color: #47464775;
+                }
+            }
+        }
+    }
+}
