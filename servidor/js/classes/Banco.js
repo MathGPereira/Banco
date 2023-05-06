@@ -5,6 +5,7 @@ export default class Banco {
     sistema = new Sistema();
 
     cadastrarUsuario(...listaDadosUsuario) {
+        this.sistema.verificaCadastroDeConta(...listaDadosUsuario);
         this.sistema.verificaCadastroDeUsuario(...listaDadosUsuario) ? console.log("Cadastro realizado com sucesso!") : console.log("Cadastro negado!");
     }
 

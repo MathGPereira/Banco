@@ -17,17 +17,6 @@
       "required": true,
       "unique": true
     },
-    "valor": {
-      "type": "biginteger",
-      "required": true,
-      "min": "0"
-    },
-    "cliente": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::cliente.cliente",
-      "inversedBy": "contas"
-    },
     "senha": {
       "type": "string",
       "required": true,
@@ -45,6 +34,10 @@
       "required": true,
       "unique": true,
       "minLength": 9
+    },
+    "valor": {
+      "required": true,
+      "type": "decimal"
     }
   }
 }

@@ -36,11 +36,9 @@
       "minLength": 11,
       "maxLength": 14
     },
-    "contas": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::conta.conta",
-      "mappedBy": "cliente"
+    "conta": {
+      "type": "json",
+      "required": true
     }
   }
 }

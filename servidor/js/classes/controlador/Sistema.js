@@ -1,5 +1,17 @@
 export default class Sistema {
 
+    verificaCadastroDeConta(...listaDadosDoUsuario) {
+        const conta = listaDadosDoUsuario[0].conta;
+        
+        if(Sistema.#validaSenha(conta.senha)) {
+            Sistema.#criaConta(conta);
+
+            return true;
+        }
+
+        return false;
+    }
+
     verificaCadastroDeUsuario(...listaDadosDoUsuario) {
         const cliente = listaDadosDoUsuario[0];
 
@@ -38,11 +50,13 @@ export default class Sistema {
         return usuario.error;
     }
 
-    async verificaUsuarioAlterado(id, listaDadosUsuario) {
+    async verificaUsuarioAlterado(id, ...listaDadosUsuario) {
         const usuario = await Sistema.#conectaAPI(id);
 
         if(!usuario.error) {
-            Sistema.#atualizaUsuario(id, listaDadosUsuario);
+            const cliente = listaDadosUsuario[0];
+
+            Sistema.#atualizaUsuario(id, cliente);
 
             return;
         }
@@ -64,6 +78,10 @@ export default class Sistema {
 
     //verificaTransferencia() {}
 
+    static async #criaConta(conta) {
+        await Sistema.#conectaAPI("", "POST", conta, "contas");
+    }
+
     static async #verificaConta(id) {
         const conta = await Sistema.#conectaAPI(id, "GET", [null], "contas")
 
@@ -74,8 +92,8 @@ export default class Sistema {
 
     }
 
-    static async #atualizaUsuario(id, listaDadosUsuario) {
-        await Sistema.#conectaAPI(id, "PUT", listaDadosUsuario);
+    static async #atualizaUsuario(id, cliente) {
+        await Sistema.#conectaAPI(id, "PUT", cliente);
     }
 
     static async #deletaUsuario(id) {
@@ -88,6 +106,14 @@ export default class Sistema {
 
     static async #mostraUsuarioCadastrado(id) {
         return await Sistema.#conectaAPI(id);
+    }
+
+    static #validaSenha(senha) {
+        if(senha >= 8) {
+            return true;
+        }
+
+        return false;
     }
 
     static #validaNome(nome) {
@@ -177,7 +203,7 @@ export default class Sistema {
         return resp.json();
     }
 
-    static #verificaMetodo(metodo, cliente) {
+    static #verificaMetodo(metodo, conteudo) {
         let option;
 
         if(metodo === "GET" || metodo === "DELETE") {
@@ -190,7 +216,7 @@ export default class Sistema {
                 headers: {
                     "Content-type": "application/json"
                 },
-                body: JSON.stringify({data: cliente})
+                body: JSON.stringify({data: conteudo})
             }
         }
 
