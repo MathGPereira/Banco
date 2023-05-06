@@ -1,0 +1,21 @@
+@import "../abstract/variaveis";
+
+.cabecalho {
+    background-color: $cor-secundaria;
+    padding: 1em;
+    &__titulo {
+        width: auto;
+        .titulo__link-login {
+            align-items: center;
+            display: flex;
+            .link-login__logo {
+                display: inline-block;
+            }
+            .link-login__texto {
+                color: $cor-primaria;
+                font-size: 40px;
+                font-weight: 700;
+            }
+        }
+    }
+}
