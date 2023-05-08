@@ -14,6 +14,7 @@
             transition: border .1s ease-in-out;
             &:hover {
                 border-bottom: 3px solid $cor-primaria;
+                border-radius: 5px;
             }
             .menu-navegacao__link {
                 color: $cor-primaria;

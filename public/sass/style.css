@@ -111,6 +111,7 @@ body {
 }
 .lateral .menu-navegacao__lista .lista__item:hover {
   border-bottom: 3px solid #474647;
+  border-radius: 5px;
 }
 .lateral .menu-navegacao__lista .lista__item .menu-navegacao__link {
   color: #474647;
@@ -120,4 +121,76 @@ body {
 }
 .lateral .menu-navegacao__lista .lista__item .menu-navegacao__link:hover {
   color: rgba(71, 70, 71, 0.4588235294);
+}
+
+.principal {
+  align-items: center;
+  background-color: #C8EFFE;
+  display: flex;
+  height: calc(100vh - 96px);
+  justify-content: center;
+  width: 100vw;
+}
+.principal__login {
+  background-color: #474647;
+  border-radius: 16px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 5px #6FD7A3;
+  height: auto;
+  padding: 4em 2em 2em;
+  text-align: center;
+  width: 40%;
+}
+.principal__login .login__titulo {
+  color: #A3A3A3;
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+.principal__login .login__formulario {
+  width: 100%;
+}
+.principal__login .login__formulario .formulario__inputs {
+  text-align: center;
+}
+.principal__login .login__formulario .formulario__inputs .input {
+  border: none;
+  text-align: left;
+}
+.principal__login .login__formulario .formulario__inputs .inputs__rotulo {
+  color: #A3A3A3;
+  font-size: 18px;
+}
+.principal__login .login__formulario .formulario__inputs .inputs__texto {
+  box-sizing: border-box;
+  border-radius: 16px;
+  font-size: 18px;
+  margin-bottom: 1em;
+  outline: none;
+  padding: 1em;
+  width: 100%;
+}
+.principal__login .login__formulario .formulario__inputs .inputs__texto::-moz-placeholder {
+  font-size: 18px;
+  vertical-align: middle;
+}
+.principal__login .login__formulario .formulario__inputs .inputs__texto::placeholder {
+  font-size: 18px;
+  vertical-align: middle;
+}
+.principal__login .login__formulario .formulario__inputs .inputs__continuar {
+  border: 1px solid #A3A3A3;
+  border-radius: 8px;
+  color: #A3A3A3;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 1em;
+  transition: background-color 0.3s ease-in-out;
+  width: 50%;
+}
+.principal__login .login__formulario .formulario__inputs .inputs__continuar:hover {
+  border-color: #474647;
+  background-color: #A3A3A3;
+  color: #474647;
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

@@ -38,6 +38,26 @@
                 </ul>
             </nav>
         </aside>
+        <main class="principal">
+            <div class="principal__login">
+                <h2 class="login__titulo">Faça o seu login</h2>
+                <form action="#" method="POST" id="formulario" autocomplete="on" autocapitalize="true" class="login__formulario">
+                    <fieldset class="formulario__inputs" form="formulario">
+                        <fieldset class="input">
+                            <label for="cpf" class="inputs__rotulo">CPF</label>
+                            <input type="text" name="cpf" id="cpf" class="inputs__texto" placeholder="CPF" pattern="/d{11}" maxlength="11" minlength="11" required>
+                            <span class="mensagem-erro"></span>
+                        </fieldset>
+                        <fieldset class="input">
+                            <label for="senha" class="inputs__rotulo">Senha</label>
+                            <input type="password" name="senha" id="senha" class="inputs__texto" placeholder="Senha" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$" required>
+                            <span class="mensagem-erro"></span>
+                        </fieldset>
+                        <button type="submit" form="formulario" class="inputs__continuar">Continuar</button>
+                    </fieldset>
+                </form>
+            </div>
+        </main>
         <script type="text/javascript" src="./public/js/jquery/jquery.js"></script>
         <script type="module" src="./public/js/main.js"></script>
     </body>

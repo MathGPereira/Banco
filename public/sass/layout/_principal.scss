@@ -1,0 +1,69 @@
+@import "../abstract/variaveis";
+
+.principal {
+    align-items: center;
+    background-color: $cor-terciaria;
+    display: flex;
+    height: calc(100vh - 96px);
+    justify-content: center;
+    width: 100vw;
+    &__login {
+        background-color: $cor-primaria;
+        border-radius: 16px;
+        box-sizing: border-box;
+        box-shadow: 2px 2px 5px $cor-quinaria;
+        height: auto;
+        padding: 4em 2em 2em;
+        text-align: center;
+        width: 40%;
+        .login__titulo {
+            color: $cor-secundaria;
+            font-size: 30px;
+            font-weight: 500;
+            margin-bottom: 1em;
+        }
+        .login__formulario {
+            width: 100%;
+            .formulario__inputs {
+                text-align: center;
+                .input {
+                    border: none;
+                    text-align: left;
+                }
+                .inputs__rotulo {
+                    color: $cor-secundaria;
+                    font-size: 18px;
+                }
+                .inputs__texto {
+                    box-sizing: border-box;
+                    border-radius: 16px;
+                    font-size: 18px;
+                    margin-bottom: 1em;
+                    outline: none;
+                    padding: 1em;
+                    width: 100%;
+                    &::placeholder {
+                        font-size: 18px;
+                        vertical-align: middle;
+                    }
+                }
+                .inputs__continuar {
+                    border: 1px solid $cor-secundaria;
+                    border-radius: 8px;
+                    color: $cor-secundaria;
+                    font-size: 18px;
+                    font-weight: 700;
+                    padding: 1em;
+                    transition: background-color .3s ease-in-out;
+                    width: 50%;
+                    &:hover {
+                        border-color: $cor-primaria;
+                        background-color: $cor-secundaria;
+                        color: $cor-primaria;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
