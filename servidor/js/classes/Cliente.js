@@ -16,9 +16,8 @@ export default class Cliente {
         this.conta = conta;
     }
 
-
-    login() {
-
+    fazLogin() {
+        
     }
 
     sacar(valor) {

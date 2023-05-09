@@ -1,5 +1,14 @@
 export default class Sistema {
 
+    async verificaLogin(cpf, senha) {
+        const bd = await Sistema.#conectaAPI();
+        bd.data.map(cliente => {
+            if(cliente.attributes.cpf === cpf && cliente.attributes.conta.senha === senha) {
+                Sistema.#logaUsuario();
+            }
+        })
+    }
+
     verificaCadastroDeConta(...listaDadosDoUsuario) {
         const conta = listaDadosDoUsuario[0].conta;
         
@@ -77,6 +86,11 @@ export default class Sistema {
     //verificaDeposito() {}
 
     //verificaTransferencia() {}
+
+    static #logaUsuario() {
+        //window.location.replace("../../../public/paginas/paginaInicial.html");
+        console.log("Login finalizado!");
+    }
 
     static async #criaConta(conta) {
         await Sistema.#conectaAPI("", "POST", conta, "contas");
