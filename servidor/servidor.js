@@ -3,5 +3,9 @@ import Sistema from "./js/classes/controlador/Sistema.js";
 const sistema = new Sistema();
 
 export function requisitaLogin(cpf, senha) {
-    sistema.verificaLogin(cpf, senha);
+    if(!sistema.verificaLogin(cpf, senha)) {
+        return false;
+    }
+
+    return true;
 }

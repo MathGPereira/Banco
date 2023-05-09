@@ -1,153 +1,159 @@
 export default class Sistema {
 
     async verificaLogin(cpf, senha) {
-        const bd = await Sistema.#conectaAPI();
-        bd.data.map(cliente => {
-            if(cliente.attributes.cpf === cpf && cliente.attributes.conta.senha === senha) {
-                Sistema.#logaUsuario();
-            }
-        })
-    }
-
-    verificaCadastroDeConta(...listaDadosDoUsuario) {
-        const conta = listaDadosDoUsuario[0].conta;
-        
-        if(Sistema.#validaSenha(conta.senha)) {
-            Sistema.#criaConta(conta);
-
-            return true;
+        if(Sistema.#validaCpf(cpf)) {
+            const bd = await Sistema.#conectaAPI();
+            
+            bd.data.map(cliente => {
+                if(cliente.attributes.cpf === cpf && cliente.attributes.conta.senha === senha) {
+                    Sistema.#logaUsuario();
+                    return true;
+                }
+            })
         }
 
         return false;
     }
-
-    verificaCadastroDeUsuario(...listaDadosDoUsuario) {
-        const cliente = listaDadosDoUsuario[0];
-
-        if(Sistema.#validaNome(cliente.nome) && Sistema.#validaEmail(cliente.email) && Sistema.#validaCpf(cliente.cpf)) {
-            try {
-                Sistema.#cadastraUsuario(cliente);
-            }catch(erro) {
-                return erro;
-            }finally {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    async verificaUsuarioCadastrado(id) {
-        const usuario = await Sistema.#conectaAPI(id);
-
-        if(usuario.error) {
-            return usuario.error;
-        }else {
-            Sistema.#mostraUsuarioCadastrado(id);
-        }
-    }
-
-    async verificaUsuarioDeletado(id) {
-        const usuario = await Sistema.#conectaAPI(id);
-
-        if(!usuario.error) {
-            Sistema.#deletaUsuario(id);
-
-            return;
-        }
-
-        return usuario.error;
-    }
-
-    async verificaUsuarioAlterado(id, ...listaDadosUsuario) {
-        const usuario = await Sistema.#conectaAPI(id);
-
-        if(!usuario.error) {
-            const cliente = listaDadosUsuario[0];
-
-            Sistema.#atualizaUsuario(id, cliente);
-
-            return;
-        }
-
-        return usuario.error;
-    }
-
-    verificaSaque(valor, conta) {
-        if(Sistema.#verificaConta(conta) && conta.valor - valor > 0) {
-            Sistema.#finalizaSaque(valor, conta);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    //verificaDeposito() {}
-
-    //verificaTransferencia() {}
 
     static #logaUsuario() {
         //window.location.replace("../../../public/paginas/paginaInicial.html");
         console.log("Login finalizado!");
     }
 
-    static async #criaConta(conta) {
-        await Sistema.#conectaAPI("", "POST", conta, "contas");
-    }
+    // verificaCadastroDeConta(...listaDadosDoUsuario) {
+    //     const conta = listaDadosDoUsuario[0].conta;
+        
+    //     if(Sistema.#validaSenha(conta.senha)) {
+    //         Sistema.#criaConta(conta);
 
-    static async #verificaConta(id) {
-        const conta = await Sistema.#conectaAPI(id, "GET", [null], "contas")
+    //         return true;
+    //     }
 
-        console.log(conta);
-    }
+    //     return false;
+    // }
 
-    static async #finalizaSaque() {
+    // verificaCadastroDeUsuario(...listaDadosDoUsuario) {
+    //     const cliente = listaDadosDoUsuario[0];
 
-    }
+    //     if(Sistema.#validaNome(cliente.nome) && Sistema.#validaEmail(cliente.email) && Sistema.#validaCpf(cliente.cpf)) {
+    //         try {
+    //             Sistema.#cadastraUsuario(cliente);
+    //         }catch(erro) {
+    //             return erro;
+    //         }finally {
+    //             return true;
+    //         }
+    //     }
 
-    static async #atualizaUsuario(id, cliente) {
-        await Sistema.#conectaAPI(id, "PUT", cliente);
-    }
+    //     return false;
+    // }
 
-    static async #deletaUsuario(id) {
-        await Sistema.#conectaAPI(id, "DELETE");
-    }
+    // async verificaUsuarioCadastrado(id) {
+    //     const usuario = await Sistema.#conectaAPI(id);
 
-    static async #cadastraUsuario(cliente) {
-        await Sistema.#conectaAPI("", "POST", cliente);
-    }
+    //     if(usuario.error) {
+    //         return usuario.error;
+    //     }else {
+    //         Sistema.#mostraUsuarioCadastrado(id);
+    //     }
+    // }
 
-    static async #mostraUsuarioCadastrado(id) {
-        return await Sistema.#conectaAPI(id);
-    }
+    // async verificaUsuarioDeletado(id) {
+    //     const usuario = await Sistema.#conectaAPI(id);
 
-    static #validaSenha(senha) {
-        if(senha >= 8) {
-            return true;
-        }
+    //     if(!usuario.error) {
+    //         Sistema.#deletaUsuario(id);
 
-        return false;
-    }
+    //         return;
+    //     }
 
-    static #validaNome(nome) {
-        if(nome.length >= 3) {
-            return true;
-        }
+    //     return usuario.error;
+    // }
 
-        return false;
-    }
+    // async verificaUsuarioAlterado(id, ...listaDadosUsuario) {
+    //     const usuario = await Sistema.#conectaAPI(id);
 
-    static #validaEmail(email) {
-        const re = /\w+@\w+\.\w+/;
-        const resultado = re.test(email);
+    //     if(!usuario.error) {
+    //         const cliente = listaDadosUsuario[0];
 
-        if(email.length >= 8 && resultado) {
-            return true;
-        }
+    //         Sistema.#atualizaUsuario(id, cliente);
 
-        return false;
-    }
+    //         return;
+    //     }
+
+    //     return usuario.error;
+    // }
+
+    // verificaSaque(valor, conta) {
+    //     if(Sistema.#verificaConta(conta) && conta.valor - valor > 0) {
+    //         Sistema.#finalizaSaque(valor, conta);
+
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
+
+    // //verificaDeposito() {}
+
+    // //verificaTransferencia() {}
+
+    // static async #criaConta(conta) {
+    //     await Sistema.#conectaAPI("", "POST", conta, "contas");
+    // }
+
+    // static async #verificaConta(id) {
+    //     const conta = await Sistema.#conectaAPI(id, "GET", [null], "contas")
+
+    //     console.log(conta);
+    // }
+
+    // static async #finalizaSaque() {
+
+    // }
+
+    // static async #atualizaUsuario(id, cliente) {
+    //     await Sistema.#conectaAPI(id, "PUT", cliente);
+    // }
+
+    // static async #deletaUsuario(id) {
+    //     await Sistema.#conectaAPI(id, "DELETE");
+    // }
+
+    // static async #cadastraUsuario(cliente) {
+    //     await Sistema.#conectaAPI("", "POST", cliente);
+    // }
+
+    // static async #mostraUsuarioCadastrado(id) {
+    //     return await Sistema.#conectaAPI(id);
+    // }
+
+    // static #validaSenha(senha) {
+    //     if(senha >= 8) {
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
+
+    // static #validaNome(nome) {
+    //     if(nome.length >= 3) {
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
+
+    // static #validaEmail(email) {
+    //     const re = /\w+@\w+\.\w+/;
+    //     const resultado = re.test(email);
+
+    //     if(email.length >= 8 && resultado) {
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
 
     static #validaCpf(cpf) {
         if(this.#validaPrimeiroDigito(cpf) && this.#validaSegundoDigito(cpf) && this.#validaNumeroRepetido(cpf)) {
