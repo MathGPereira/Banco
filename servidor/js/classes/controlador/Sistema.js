@@ -16,8 +16,62 @@ export default class Sistema {
     }
 
     static #logaUsuario() {
-        //window.location.replace("../../../public/paginas/funcionais/paginaInicial.html");
-        console.log("Login finalizado!");
+        window.location.replace("../../../public/paginas/funcionais/paginaInicial.html");
+    }
+
+    async verificaCadastroDeUsuario(...listaDadosDoUsuario) {
+        const cliente = listaDadosDoUsuario[0];
+
+        if(Sistema.#validaNome(cliente.nome) && Sistema.#validaEmail(cliente.email) && Sistema.#validaCpf(cliente.cpf) && await Sistema.#validaInputsRepetidos(cliente.cpf, cliente.email, cliente.conta.usuario)) {
+            try {
+                Sistema.#cadastraUsuario(cliente);
+            }catch(erro) {
+                return erro;
+            }finally {
+                window.location.replace("../../../index.html");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    static async #cadastraUsuario(cliente) {
+        await Sistema.#conectaAPI("", "POST", cliente);
+    }
+
+    static async #validaInputsRepetidos(cpf, email, usuario) {
+        let retorno;
+        const bd = await Sistema.#conectaAPI();
+
+        bd.data.map(cliente => {
+            if(cliente.attributes.cpf === cpf || cliente.attributes.email === email || cliente.attributes.conta.usuario === usuario) {
+                retorno = false;
+            }else {
+                retorno = true;
+            }
+        });
+
+        return retorno;
+    }
+
+    static #validaNome(nome) {
+        if(nome.length >= 3) {
+            return true;
+        }
+
+        return false;
+    }
+
+    static #validaEmail(email) {
+        const re = /\w+@\w+\.\w+/;
+        const resultado = re.test(email);
+
+        if(email.length >= 8 && resultado) {
+            return true;
+        }
+
+        return false;
     }
 
     // verificaCadastroDeConta(...listaDadosDoUsuario) {
@@ -27,22 +81,6 @@ export default class Sistema {
     //         Sistema.#criaConta(conta);
 
     //         return true;
-    //     }
-
-    //     return false;
-    // }
-
-    // verificaCadastroDeUsuario(...listaDadosDoUsuario) {
-    //     const cliente = listaDadosDoUsuario[0];
-
-    //     if(Sistema.#validaNome(cliente.nome) && Sistema.#validaEmail(cliente.email) && Sistema.#validaCpf(cliente.cpf)) {
-    //         try {
-    //             Sistema.#cadastraUsuario(cliente);
-    //         }catch(erro) {
-    //             return erro;
-    //         }finally {
-    //             return true;
-    //         }
     //     }
 
     //     return false;
@@ -120,35 +158,12 @@ export default class Sistema {
     //     await Sistema.#conectaAPI(id, "DELETE");
     // }
 
-    // static async #cadastraUsuario(cliente) {
-    //     await Sistema.#conectaAPI("", "POST", cliente);
-    // }
-
     // static async #mostraUsuarioCadastrado(id) {
     //     return await Sistema.#conectaAPI(id);
     // }
 
     // static #validaSenha(senha) {
     //     if(senha >= 8) {
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-
-    // static #validaNome(nome) {
-    //     if(nome.length >= 3) {
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-
-    // static #validaEmail(email) {
-    //     const re = /\w+@\w+\.\w+/;
-    //     const resultado = re.test(email);
-
-    //     if(email.length >= 8 && resultado) {
     //         return true;
     //     }
 

@@ -20,6 +20,4 @@ formulario.submit(function(evento) {
     }else if(formulario.attr("data-formulario") === "criarConta"){
         requisitaCadastro(nome, sobrenome, email, usuario, cpf, senha);
     }
-
-    
 });

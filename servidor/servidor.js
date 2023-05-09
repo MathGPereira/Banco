@@ -1,4 +1,6 @@
 import Sistema from "./js/classes/controlador/Sistema.js";
+import Cliente from "./js/classes/Cliente.js";
+import Conta from "./js/classes/Conta.js";
 
 const sistema = new Sistema();
 
@@ -11,5 +13,12 @@ export function requisitaLogin(cpf, senha) {
 }
 
 export function requisitaCadastro(...infoUsuario) {
-    console.log(infoUsuario);
+    const [nome, sobrenome, email, usuario, cpf, senha] = infoUsuario;
+    const cliente = new Cliente(nome, sobrenome, email, cpf, new Conta(usuario, senha));
+
+    if(!sistema.verificaCadastroDeUsuario(cliente)) {
+        return false;
+    }
+
+    return true;
 }
