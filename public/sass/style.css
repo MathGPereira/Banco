@@ -193,4 +193,38 @@ body {
   background-color: #A3A3A3;
   color: #474647;
   cursor: pointer;
+}
+
+.principal__conteudo {
+  box-sizing: border-box;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  display: grid;
+  grid-template: auto/repeat(3, 1fr);
+  margin: 0 2em;
+}
+.principal__conteudo div {
+  background-color: #A3A3A3;
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 1em;
+}
+.principal__conteudo div h2 {
+  color: #474647;
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+.principal__conteudo div .objetivos__lista {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 20px;
+  line-height: 1.5em;
+}
+.principal__conteudo div .objetivos__lista li {
+  margin: 0 1em 1.5em 0;
+}
+.principal__conteudo div p {
+  line-height: 1.4em;
 }/*# sourceMappingURL=style.css.map */
