@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Criar Conta</title>
         <link type="text/css" rel="stylesheet" href="../sass/style.css">
+        <link type="text/css" rel="stylesheet" href="../sass/pages/criarConta/criarConta.css">
         <script type="module" src="../../servidor/servidor.js"></script>
     </head>
     <body>
@@ -38,6 +39,46 @@
                 </ul>
             </nav>
         </aside>
+        <main class="principal">
+            <div class="principal__criar-conta">
+                <h2 class="criar-conta__titulo">Criar conta</h2>
+                <form action="#" method="POST" id="formulario" autocomplete="on" autocapitalize="true" class="criar-conta__formulario" data-formulario>
+                    <fieldset class="formulario__inputs" form="formulario">
+                        <fieldset class="input" form="formulario">
+                            <label for="nome" class="inputs__rotulo">Nome</label>
+                            <input type="text" name="nome" id="nome" class="inputs__texto" placeholder="Nome" required data-nome>
+                            <span class="mensagem-erro"></span>
+                        </fieldset>
+                        <fieldset class="input" form="formulario">
+                            <label for="sobrenome" class="inputs__rotulo">Sobrenome</label>
+                            <input type="text" name="sobrenome" id="sobrenome" class="inputs__texto" placeholder="Sobrenome" required data-sobrenome>
+                            <span class="mensagem-erro"></span>
+                        </fieldset>
+                        <fieldset class="input" form="formulario">
+                            <label for="email" class="inputs__rotulo">Email</label>
+                            <input type="text" name="email" id="email" class="inputs__texto" placeholder="email" required data-email>
+                            <span class="mensagem-erro"></span>
+                        </fieldset>
+                        <fieldset class="input" form="formulario">
+                            <label for="cpf" class="inputs__rotulo">CPF</label>
+                            <input type="text" name="cpf" id="cpf" class="inputs__texto" placeholder="cpf" pattern="\d{11}" maxlength="11" minlength="11" required data-cpf>
+                            <span class="mensagem-erro"></span>
+                        </fieldset>
+                        <fieldset class="input" form="formulario">
+                            <label for="usuario" class="inputs__rotulo">Usuario</label>
+                            <input type="text" name="usuario" id="usuario" class="inputs__texto" placeholder="usuario" required data-usuario>
+                            <span class="mensagem-erro"></span>
+                        </fieldset>
+                        <fieldset class="input" form="formulario">
+                            <label for="senha" class="inputs__rotulo">Senha</label>
+                            <input type="password" name="senha" id="senha" class="inputs__texto" placeholder="senha" minlength="8" required data-senha>
+                            <span class="mensagem-erro"></span>
+                        </fieldset>
+                    </fieldset>
+                    <button type="submit" form="formulario" class="inputs__continuar">Criar Conta</button>
+                </form>
+            </div>
+        </main>
         <script type="text/javascript" src="../js/jquery/jquery.js"></script>
         <script type="module" src="../js/main.js"></script>
     </body>

@@ -7,7 +7,7 @@
     height: calc(100vh - 96px);
     justify-content: center;
     width: 100vw;
-    &__login {
+    &__login, &__criar-conta {
         background-color: $cor-primaria;
         border-radius: 16px;
         box-sizing: border-box;
@@ -16,13 +16,13 @@
         padding: 4em 2em 2em;
         text-align: center;
         width: 40%;
-        .login__titulo {
+        .login__titulo, .criar-conta__titulo {
             color: $cor-secundaria;
             font-size: 30px;
             font-weight: 500;
             margin-bottom: 1em;
         }
-        .login__formulario {
+        .login__formulario, .criar-conta__formulario {
             width: 100%;
             .formulario__inputs {
                 text-align: center;

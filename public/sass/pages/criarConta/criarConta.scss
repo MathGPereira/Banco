@@ -1,0 +1,27 @@
+@import "../../abstract/variaveis";
+
+.principal__criar-conta {
+    width: 70%;
+    .formulario__inputs {
+        box-sizing: border-box;
+        column-gap: 15px;
+        display: grid;
+        grid-template: repeat(2, auto) / repeat(3, auto);
+    }
+    .inputs__continuar {
+        border: 1px solid $cor-secundaria;
+        border-radius: 8px;
+        color: $cor-secundaria;
+        font-size: 18px;
+        font-weight: 700;
+        padding: 1em;
+        transition: background-color .3s ease-in-out;
+        width: 50%;
+        &:hover {
+            border-color: $cor-primaria;
+            background-color: $cor-secundaria;
+            color: $cor-primaria;
+            cursor: pointer;
+        }
+    }
+}
