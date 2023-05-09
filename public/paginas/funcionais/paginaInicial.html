@@ -4,9 +4,46 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inicial</title>
+        <title>Principal</title>
+        <link type="text/css" rel="stylesheet" href="../../sass/style.css">
+        <link type="text/css" rel="stylesheet" href="../../sass/pages/inicial/inicial.css">
     </head>
     <body>
-        <h1>login finalizado</h1>
+        <header class="cabecalho">
+            <h1 class="cabecalho__titulo">
+                <a href="./paginaInicial.html" class="titulo__link-login" rel="follow prev" target="_self">
+                    <img src="../../img/logo/logo.png" alt="Logo do Banco ATM" class="link-login__logo">
+                    <p class="link-login__texto">Banco ATM</p>
+                </a>
+            </h1>
+            <p class="valor__texto">
+                R$
+                <span class="valor">0.00</span> |
+            </p>
+            <p class="nome__texto">
+                Bem-vindo(a),
+                <span class="nome">Matheus</span>
+            </p>
+        </header>
+        <main class="principal">
+            <div class="principal__opcoes">
+                <button class="opcoes__opcao">
+                    <div class="opcao__numero">1</div>
+                    <p class="opcao__descricao">Sacar</p>
+                </button>
+                <button class="opcoes__opcao">
+                    <div class="opcao__numero">2</div>
+                    <p class="opcao__descricao">Depositar</p>
+                </button>
+                <button class="opcoes__opcao">
+                    <div class="opcao__numero">3</div>
+                    <p class="opcao__descricao">Transferir</p>
+                </button>
+                <button class="opcoes__opcao">
+                    <div class="opcao__numero">4</div>
+                    <p class="opcao__descricao">Sair</p>
+                </button>
+            </div>
+        </main>
     </body>
 </html>

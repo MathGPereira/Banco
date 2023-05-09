@@ -5,8 +5,8 @@ export default class Sistema {
             const bd = await Sistema.#conectaAPI();
 
             bd.data.map(cliente => {
-                if(cliente.attributes.cpf === cpf && cliente.attributes.conta.senha === senha) {
-                    Sistema.#logaUsuario();
+                if(cliente.attributes.cpf === cpf && cliente.attributes.conta.senha === senha && Sistema.#validaSenha(senha)) {
+                    Sistema.#logaUsuario(cpf);
                     return true;
                 }
             })
@@ -15,8 +15,16 @@ export default class Sistema {
         return false;
     }
 
-    static #logaUsuario() {
-        window.location.replace("../../../public/paginas/funcionais/paginaInicial.html");
+    static async #logaUsuario(cpf) {
+        const url = "http://localhost:3000/entrada";
+
+        try {
+            await fetch(url, this.#verificaMetodo("POST", {cpf}));
+        }catch(erro) {
+            console.log(erro);
+        }finally {
+            window.location.replace("../../../public/paginas/funcionais/paginaInicial.html");
+        }
     }
 
     async verificaCadastroDeUsuario(...listaDadosDoUsuario) {
@@ -74,18 +82,6 @@ export default class Sistema {
         return false;
     }
 
-    // verificaCadastroDeConta(...listaDadosDoUsuario) {
-    //     const conta = listaDadosDoUsuario[0].conta;
-        
-    //     if(Sistema.#validaSenha(conta.senha)) {
-    //         Sistema.#criaConta(conta);
-
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-
     // async verificaUsuarioCadastrado(id) {
     //     const usuario = await Sistema.#conectaAPI(id);
 
@@ -136,16 +132,6 @@ export default class Sistema {
 
     // //verificaTransferencia() {}
 
-    // static async #criaConta(conta) {
-    //     await Sistema.#conectaAPI("", "POST", conta, "contas");
-    // }
-
-    // static async #verificaConta(id) {
-    //     const conta = await Sistema.#conectaAPI(id, "GET", [null], "contas")
-
-    //     console.log(conta);
-    // }
-
     // static async #finalizaSaque() {
 
     // }
@@ -162,13 +148,13 @@ export default class Sistema {
     //     return await Sistema.#conectaAPI(id);
     // }
 
-    // static #validaSenha(senha) {
-    //     if(senha >= 8) {
-    //         return true;
-    //     }
+    static #validaSenha(senha) {
+        if(senha >= 8) {
+            return true;
+        }
 
-    //     return false;
-    // }
+        return false;
+    }
 
     static #validaCpf(cpf) {
         if(this.#validaPrimeiroDigito(cpf) && this.#validaSegundoDigito(cpf) && this.#validaNumeroRepetido(cpf)) {
