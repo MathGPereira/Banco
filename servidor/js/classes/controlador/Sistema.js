@@ -3,7 +3,7 @@ export default class Sistema {
     async verificaLogin(cpf, senha) {
         if(Sistema.#validaCpf(cpf)) {
             const bd = await Sistema.#conectaAPI();
-            
+
             bd.data.map(cliente => {
                 if(cliente.attributes.cpf === cpf && cliente.attributes.conta.senha === senha) {
                     Sistema.#logaUsuario();
@@ -16,7 +16,7 @@ export default class Sistema {
     }
 
     static #logaUsuario() {
-        //window.location.replace("../../../public/paginas/paginaInicial.html");
+        //window.location.replace("../../../public/paginas/funcionais/paginaInicial.html");
         console.log("Login finalizado!");
     }
 
