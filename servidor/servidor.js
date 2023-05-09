@@ -22,3 +22,7 @@ export function requisitaCadastro(...infoUsuario) {
 
     return true;
 }
+
+export function requisitaAcao(acao) {
+    sistema.verificaAcao(acao);
+}

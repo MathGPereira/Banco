@@ -82,15 +82,43 @@ export default class Sistema {
         return false;
     }
 
-    // async verificaUsuarioCadastrado(id) {
-    //     const usuario = await Sistema.#conectaAPI(id);
+    async verificaAcao(acao, valor, conta="") {
+        const url = "http://localhost:3000/entrada";
+        const bd = await Sistema.#conectaAPI();
+        const resp = await fetch(url);
+        const respJson = await resp.json();
+        
+        bd.data.map(item => {
+            if(item.attributes.cpf === respJson[respJson.length - 1].data.cpf) {
+                if(acao === "sacar") {
+                    Sistema.#verificaSaque(valor, conta);
+                }else if(acao === "depositar") {
+                    //Sistema.#verificaDeposito()
+                }else if(acao === "transferir") {
+                    //Sistema.#verificaTransferencia();
+                }else {
+                    console.log("sair");
+                }
+            }
+        });
+    }
+    //cpf, valor
+    static async #verificaSaque() {
+        const bd = await Sistema.#conectaAPI();
+        const bdCpf = bd.data;
+        console.log(bdCpf);
+        // if(Sistema.#verificaConta(conta) && conta.valor - valor > 0) {
+        //     Sistema.#finalizaSaque(valor, conta);
 
-    //     if(usuario.error) {
-    //         return usuario.error;
-    //     }else {
-    //         Sistema.#mostraUsuarioCadastrado(id);
-    //     }
-    // }
+        //     return true;
+        // }
+
+        // return false;
+    }
+
+    static async #finalizaSaque() {
+
+    }
 
     // async verificaUsuarioDeletado(id) {
     //     const usuario = await Sistema.#conectaAPI(id);
@@ -116,24 +144,6 @@ export default class Sistema {
     //     }
 
     //     return usuario.error;
-    // }
-
-    // verificaSaque(valor, conta) {
-    //     if(Sistema.#verificaConta(conta) && conta.valor - valor > 0) {
-    //         Sistema.#finalizaSaque(valor, conta);
-
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-
-    // //verificaDeposito() {}
-
-    // //verificaTransferencia() {}
-
-    // static async #finalizaSaque() {
-
     // }
 
     // static async #atualizaUsuario(id, cliente) {
