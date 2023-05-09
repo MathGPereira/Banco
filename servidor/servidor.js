@@ -9,3 +9,7 @@ export function requisitaLogin(cpf, senha) {
 
     return true;
 }
+
+export function requisitaCadastro(...infoUsuario) {
+    console.log(infoUsuario);
+}
